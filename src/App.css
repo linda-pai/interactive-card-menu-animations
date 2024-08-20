@@ -1,38 +1,471 @@
+:root {
+  --primary-color: #fa1b5b;
+  --secondary-color: #fff;
+  --tertiary-color: #000;
+}
+
+body,
+html {
+  background: linear-gradient(105deg, #e66465, #9198e5);
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  max-width: 576px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: center;
+  font-size: calc(10px + 1.8vmin);
+  font-family: PingFang TC apple-system, 微軟正黑體, Microsoft YaHei,
+    Microsoft JhengHei, Helvetica, Arial, sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
+/* 四張圖卡 Start */
+.cards-wrapper {
+  transition: all 1.2s;
+}
+.cards-wrapper,
+.selected-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card {
+  position: relative;
+  flex: 0 0 auto;
+  width: calc(100% / 2 - 60px);
+  max-width: 240px;
+  margin: 10px 30px;
+  transition: all 0.7s;
+  transition-delay: 750ms;
+  transition-property: transform;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card:hover {
+  cursor: pointer;
+}
+.card.selected .animation-card,
+.card.selected svg path,
+.card.selected .animation-card::before {
+  border: 2px solid var(--primary-color);
+  stroke: var(--primary-color);
+}
+
+.card.selected .text-frame,
+.card.selected .text-frame-outline,
+.card.selected .text-frame-outline::before,
+.card.selected .text-frame-outline::after {
+  border: 1px solid var(--primary-color);
+}
+
+.card.selected .text-initial {
+  color: var(--tertiary-color);
+}
+
+.card.selected .text-frame,
+.card.selected .text-frame-outline {
+  box-shadow: none;
+}
+
+.card.selected .text-frame {
+  background: var(--primary-color);
+  border-radius: 25px;
+  border: 1px solid var(--primary-color);
+}
+
+.card.selected .animated-line::before,
+.card.selected .animated-line::after {
+  border: 2px solid var(--primary-color);
+}
+
+.card .text-frame-wrapper {
+  transition: all 0.6s;
+  animation: frame-appear 2.4s forwards cubic-bezier(0.175, 0.685, 0.32, 0.675);
+}
+
+.card .text-initial {
+  width: 100%;
+  position: absolute;
+  bottom: calc(10px + 1.8vmin);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--secondary-color);
+}
+
+.animation-card {
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+  position: relative;
+  width: 80%;
+  max-width: 184px;
+  aspect-ratio: 4/6;
+  margin: 0 auto;
+}
+
+.animation-card::before {
+  content: " ";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+}
+
+.content-wrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+.content-wrapper svg path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 5s infinite forwards;
+  animation-delay: 1s;
+  opacity: 0;
+}
+
+.text-frame-wrapper {
+  position: absolute;
+  bottom: 12%;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  color: var(--secondary-color);
+}
+
+.text-frame {
+  border: 1px solid var(--secondary-color);
+  border-radius: 25px;
+  padding: 6px;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.5);
+  height: calc(22px + 1.8vmin);
+}
+
+.frame-place-holder {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 0.6s;
+  margin: 2px;
+  height: calc(18px + 1.8vmin);
+}
+
+.text-frame-outline {
+  width: 105%;
+  height: 55%;
+  border: 1px solid var(--secondary-color);
+  border-radius: 18px;
+  padding: 4px 8px;
+  position: absolute;
+  bottom: 12%;
+  right: -6%;
+  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.5);
+}
+
+.text-frame-outline::before {
+  content: " ";
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+  padding: 6px;
+  position: absolute;
+  left: -4%;
+  bottom: 28%;
+}
+.text-frame-outline::after {
+  content: " ";
+  border: 1px solid var(--secondary-color);
+  border-radius: 20px;
+  padding: 6px;
+  position: absolute;
+  right: -4%;
+  bottom: 28%;
+}
+
+.selected-card {
+  display: none;
+}
+
+.animated-line {
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    filter: contrast(1.1);
   }
+
+  &:active {
+    filter: contrast(0.9);
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border: 2px solid var(--secondary-color);
+    transition: all 0.5s;
+    animation: clippath 6s infinite linear;
+    border-radius: 10px;
+    width: 78%;
+    margin: 0 auto;
+  }
+
+  &::after {
+    animation: clippath 6s infinite -3s linear;
+  }
+}
+
+#card-1 {
+  animation: card-appear-left-top 1.6s forwards
+    cubic-bezier(0.175, 0.685, 0.32, 0.675);
+}
+
+#card-2 {
+  animation: card-appear-right-top 1.4s forwards
+    cubic-bezier(0.475, 0.485, 0.12, 0.275);
+}
+
+#card-3 {
+  animation: card-appear-left-bottom 1.8s forwards
+    cubic-bezier(0.575, 0.385, 0.12, 0.475);
+}
+
+#card-4 {
+  animation: card-appear-right-bottom 1.6s forwards
+    cubic-bezier(0.175, 0.385, 0.12, 0.475);
+}
+
+.animated-line-0 {
+  &::after {
+    animation-delay: 2s;
+  }
+
+  &::before {
+    animation-delay: 3s;
+  }
+}
+
+.animated-line-1 {
+  &::after {
+    animation-delay: 1s;
+  }
+
+  &::before {
+    animation-delay: 2s;
+  }
+}
+
+.animated-line-2 {
+  &::after {
+    animation-delay: 1s;
+  }
+
+  &::before {
+    animation-delay: 4s;
+  }
+}
+
+.animated-line-3 {
+  &::after {
+    animation-delay: 6s;
+  }
+
+  &::before {
+    animation-delay: 1s;
+  }
+}
+/* 四張圖卡 End */
+
+/*  選單下拉 Start */
+.option-select-wrapper {
+  position: relative;
+  width: 240px;
+  top: -20vh;
+}
+
+.option-select-wrapper .text-frame-wrapper {
+  min-width: 220px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  color: var(--secondary-color);
+}
+
+.option-select-wrapper .text-frame-outline,
+.option-select-wrapper .text-frame {
+  transition: all 0.6s;
+  transform: scaleX(0);
+}
+
+.option-select-wrapper .text-frame-outline {
+  animation: scaleUp 1.2s forwards;
+}
+
+.option-select-wrapper .text-frame {
+  animation: scaleUp 1s forwards;
+  animation-delay: 0.3s;
+}
+
+.select-wrapper {
+  position: absolute;
+  width: 220px;
+  right: 4%;
+  top: -2px;
+  border: 1px solid var(--secondary-color);
+  border-top: none;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  max-height: 320px;
+  transform: scaleY(0);
+  transform-origin: top;
+  overflow: hidden;
+  transition: all 0.6s;
+}
+
+.option-item {
+  padding: 0 6px;
+  color: var(--secondary-color);
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.option-item:hover {
+  cursor: pointer;
+}
+
+.option-item p {
+  color: var(--secondary-color);
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.option-item.selected p {
+  animation: colorChange 0.3s forwards;
+}
+/*  選單下拉 End */
+
+/*  Animation */
+@keyframes dash {
   to {
-    transform: rotate(360deg);
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes clippath {
+  0%,
+  100% {
+    clip-path: inset(0 0 98% 0);
+  }
+
+  25% {
+    clip-path: inset(0 98% 0 0);
+  }
+  50% {
+    clip-path: inset(98% 0 0 0);
+  }
+  75% {
+    clip-path: inset(0 0 0 98%);
+  }
+}
+
+@keyframes frame-appear {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes card-appear-left-top {
+  0% {
+    transform: translateX(-100px) translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes card-appear-left-bottom {
+  0% {
+    transform: translateX(-100px) translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes card-appear-right-top {
+  0% {
+    transform: translateX(100px) translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes card-appear-right-bottom {
+  0% {
+    transform: translateX(100px) translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    color: var(--secondary-color);
+    border: 1px solid transparent;
+  }
+  100% {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleDown {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }
