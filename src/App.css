@@ -61,7 +61,7 @@ html {
   border: 1px solid var(--primary-color);
 }
 
-.card.selected .text-initial {
+.card.selected .text-frame-content {
   color: var(--tertiary-color);
 }
 
