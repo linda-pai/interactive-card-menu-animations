@@ -86,12 +86,13 @@ html {
   animation: frame-appear 2.4s forwards cubic-bezier(0.175, 0.685, 0.32, 0.675);
 }
 
-.card .text-initial {
-  width: 100%;
+.card .text-frame-content {
   position: absolute;
-  bottom: calc(10px + 1.8vmin);
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 12%;
+  right: 0;
+  left: 0;
+  height: calc(22px + 1.8vmin);
+  margin: 6px;
   color: var(--secondary-color);
 }
 

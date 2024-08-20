@@ -165,7 +165,7 @@ function App() {
                   <div className="text-frame"></div>
                   <div className="text-frame-outline"></div>
                 </div>
-                <div className="text-initial">{content[index].title}</div>
+                <div className="text-frame-content">{content[index].title}</div>
               </div>
             </div>
           ))}
