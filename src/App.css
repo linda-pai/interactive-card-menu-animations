@@ -1,12 +1,14 @@
 :root {
   --primary-color: #fa1b5b;
   --secondary-color: #fff;
-  --tertiary-color: #000;
+  --tertiary-color: #4f4f4f;
 }
 
 body,
 html {
-  background: linear-gradient(105deg, #e66465, #9198e5);
+  background: linear-gradient(105deg, #e66465, #9198e5, #3d7eaa, #96e6a1);
+  background-size: 300% 300%;
+  animation: gradient 8s ease infinite;
 }
 
 .App {
@@ -19,8 +21,8 @@ html {
   justify-content: center;
   text-align: center;
   font-size: calc(10px + 1.8vmin);
-  font-family: PingFang TC apple-system, 微軟正黑體, Microsoft YaHei,
-    Microsoft JhengHei, Helvetica, Arial, sans-serif;
+  font-family: "Dancing Script", cursive, PingFang TC apple-system, 微軟正黑體,
+    Microsoft YaHei, Microsoft JhengHei, Helvetica, Arial, sans-serif;
 }
 
 /* 四張圖卡 Start */
@@ -41,7 +43,7 @@ html {
   margin: 10px 30px;
   transition: all 0.7s;
   transition-delay: 750ms;
-  transition-property: transform;
+  transition-property: transform opacity;
 }
 
 .card:hover {
@@ -94,6 +96,7 @@ html {
   height: calc(22px + 1.8vmin);
   margin: 6px;
   color: var(--secondary-color);
+  font-weight: 700;
 }
 
 .animation-card {
@@ -347,10 +350,11 @@ html {
   padding: 8px 10px;
   border: 1px solid transparent;
   border-radius: 10px;
+  font-weight: 700;
 }
 
 .option-item.selected p {
-  animation: colorChange 0.3s forwards;
+  animation: colorChange 1s forwards;
 }
 /*  選單下拉 End */
 
@@ -440,12 +444,17 @@ html {
 
 @keyframes colorChange {
   0% {
+    transform: scale(1);
     color: var(--secondary-color);
     border: 1px solid transparent;
+  }
+  50% {
+    transform: scale(1.1);
   }
   100% {
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
+    transform: scale(1);
   }
 }
 
@@ -468,5 +477,17 @@ html {
   100% {
     transform: scale(0);
     opacity: 0;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

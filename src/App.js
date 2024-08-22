@@ -8,22 +8,22 @@ import { ReactComponent as Flower4 } from "./flower_4.svg";
 
 const content = [
   {
-    title: "毅力",
+    title: "Purity",
     svg: <Flower1 />,
     id: 1,
   },
   {
-    title: "樂觀",
+    title: "Beginnings",
     svg: <Flower2 />,
     id: 2,
   },
   {
-    title: "積極",
+    title: "Fortunate",
     svg: <Flower3 />,
     id: 3,
   },
   {
-    title: "執著",
+    title: "Unique",
     svg: <Flower4 />,
     id: 4,
   },
@@ -31,15 +31,15 @@ const content = [
 
 const options = [
   {
-    title: "無懼未來的自己",
+    title: "Bloom of Serenity",
     id: 1,
   },
   {
-    title: "勇於挑戰的自己",
+    title: "Petal of Passion",
     id: 2,
   },
   {
-    title: "珍惜每天的自己",
+    title: "Bud of Insight",
     id: 3,
   },
   {
@@ -114,13 +114,13 @@ function App() {
       setTimeout(() => {
         const selectWrapper = document.querySelector(".select-wrapper");
         selectWrapper.style.transform = "scaleY(0)";
-      }, 2000);
+      }, 1800);
 
       //framePlaceHolder scaleY to 0 after 2.5s
       setTimeout(() => {
         const framePlaceHolder = document.querySelector(".frame-place-holder");
         framePlaceHolder.style.transform = "scaleY(0)";
-      }, 2500);
+      }, 3000);
 
       const optionSelectWrapper = document.querySelector(
         ".option-select-wrapper"
@@ -130,7 +130,7 @@ function App() {
       setTimeout(() => {
         const textFrame = optionSelectWrapper.querySelector(".text-frame");
         textFrame.style.animation = "scaleDown 0.3s forwards";
-      }, 3000);
+      }, 3500);
 
       //option-select-wrapper > text-frame-outline scaleY to 0 after 3.3s
       setTimeout(() => {
@@ -138,7 +138,7 @@ function App() {
           ".text-frame-outline"
         );
         textFrameOutline.style.animation = "scaleDown 0.3s forwards";
-      }, 3300);
+      }, 3700);
     }
   }, [selectOption]);
 
